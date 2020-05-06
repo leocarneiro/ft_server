@@ -13,7 +13,8 @@ FROM debian:buster
 LABEL maintainer="Leonardo Ramos <lramos-r@student.42sp.org.br>"
 
 COPY ./srcs/ /tmp/
-RUN bash /tmp/install.sh && bash /tmp/clean.sh
-RUN bash /tmp/start.sh
+RUN bash /tmp/install.sh && bash /tmp/clean.sh && bash /tmp/start.sh
+
+EXPOSE 80 8080 443
 ENTRYPOINT bash
 
