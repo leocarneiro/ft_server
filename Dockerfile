@@ -12,7 +12,8 @@
 FROM debian:buster
 LABEL maintainer="Leonardo Ramos <lramos-r@student.42sp.org.br>"
 
-COPY ./srcs/ /root/
-RUN bash /root/install.sh && apt-get clean
+COPY ./srcs/ /tmp/
+RUN bash /tmp/install.sh && bash /tmp/clean.sh
+RUN bash /tmp/start.sh
 ENTRYPOINT bash
 
