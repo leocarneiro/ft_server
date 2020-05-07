@@ -2,15 +2,28 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    start.sh                                           :+:      :+:    :+:    #
+#    autoindex                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lramos-r <lramos-r@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/06 17:57:14 by lramos-r          #+#    #+#              #
-#    Updated: 2020/05/07 11:53:49 by lramos-r         ###   ########.fr        #
+#    Created: 2020/05/07 11:10:22 by lramos-r          #+#    #+#              #
+#    Updated: 2020/05/07 11:52:10 by lramos-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-service nginx start;
-service php7.3-fpm start;
-service mysql start;
+case $1 in
+   "on") sed -i "s/autoindex.*/autoindex on;/" "/etc/nginx/sites-available/nginx.conf" 
+         echo "Autoindex is ON!"
+	 ;;
+   "off") sed -i "s/autoindex.*/autoindex off;/" "/etc/nginx/sites-available/nginx.conf" 
+         echo "Autoindex is OFF!"
+         ;;
+   *) echo "Opção inválida!"
+      exit 1
+      ;;
+esac
+
+echo "Restarting nginx after changes:"
+/etc/init.d/nginx restart
+
+echo "It's done."

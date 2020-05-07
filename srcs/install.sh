@@ -4,10 +4,10 @@
 #                                                         :::      ::::::::    #
 #    install.sh                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lramos-r <lramos-r@students.42sp.org.br>   +#+  +:+       +#+         #
+#    By: lramos-r <lramos-r@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/02 16:57:22 by lramos-r          #+#    #+#              #
-#    Updated: 2020/05/02 16:57:22 by lramos-r         ###   ########.fr        #
+#    Updated: 2020/05/07 11:53:08 by lramos-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ chmod 600 /etc/nginx/ssl/localhost*
 
 #Configure Nginx
 mkdir /var/www/localhost
-cp /var/www/html/index.nginx-debian.html /var/www/localhost/
+cp /var/www/html/index.nginx-debian.html /var/www/localhost/nginx.html
 cp /tmp/nginx.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 rm /etc/nginx/sites-enabled/default
@@ -68,3 +68,7 @@ chmod -R 755 /var/www/*
 echo "CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;" |  mysql -u root
 echo "GRANT ALL ON wordpress.* TO 'wordpress_user'@'localhost' IDENTIFIED BY 'password';" | mysql -u root
 echo "FLUSH PRIVILEGES;" | mysql -u root
+
+#Set up autoindex
+echo "alias autoindex=\"bash /tmp/autoindex\"" >> ~/.bashrc
+source ~/.bashrc
